@@ -1,11 +1,21 @@
-library(rvest)
-library(dplyr)
-Years <- hoopR::most_recent_mbb_season():2002
+suppressPackageStartupMessages(suppressMessages(library(rvest)))
+suppressPackageStartupMessages(suppressMessages(library(dplyr)))
+suppressPackageStartupMessages(suppressMessages(library(tidyr)))
+suppressPackageStartupMessages(suppressMessages(library(stringr)))
+suppressPackageStartupMessages(suppressMessages(library(magrittr)))
+suppressPackageStartupMessages(suppressMessages(library(jsonlite)))
+suppressPackageStartupMessages(suppressMessages(library(purrr)))
+suppressPackageStartupMessages(suppressMessages(library(progressr)))
+suppressPackageStartupMessages(suppressMessages(library(data.table)))
+suppressPackageStartupMessages(suppressMessages(library(arrow)))
+suppressPackageStartupMessages(suppressMessages(library(glue)))
+suppressPackageStartupMessages(suppressMessages(library(optparse)))
+years <- hoopR::most_recent_mbb_season():2002
 
 browser <- hoopR::login()
 
 all_teams_links <- data.frame()
-for (year in Years) {
+for (year in years) {
   url <- paste0("https://kenpom.com/index.php?y=", year)
   page <- rvest::session_jump_to(browser, url)
   q <- (page %>%
@@ -64,20 +74,10 @@ for (year in Years) {
 }
 all_teams <- collapse::funique.data.frame(all_teams_links)
 
-write.csv(all_teams, "data-raw/kp_team_info.csv", row.names = FALSE)
+write.csv(all_teams, "data/kp_team_info.csv", row.names = FALSE)
 teams_links <- all_teams
 usethis::use_data(teams_links, overwrite = TRUE)
 
-
 teamlist <- data.frame(hoopR::teams_links)
 
-
 teamlist
-
-
-
-
-
-
-
-

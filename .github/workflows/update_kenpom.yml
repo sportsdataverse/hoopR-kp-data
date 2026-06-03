@@ -3,6 +3,9 @@ name: Update KenPom Links
 on:
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   kp_update_links:
     runs-on: ${{ matrix.config.os }}

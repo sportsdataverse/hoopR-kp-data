@@ -26,8 +26,9 @@ paywalled and not freely redistributable. Output stays in this repo's
   and `R/update.R` (scrape + commit + push to `main`).
 - Team-link index lives upstream in `hoopR::teams_links`. Rebuild it via
   `Rscript R/pull_team_links.R` whenever a new season starts.
-- The single CI workflow is `.github/workflows/update_kenpom.yml`
-  (manual `workflow_dispatch` only — no cron yet).
+- There is no CI: the former `update_kenpom.yml` workflow was removed as a
+  zombie (no run step). All scrapes are manual — hand-edit `yr` / `version`
+  in `R/update.R` first.
 - Do not commit credentials. `KP_USER` / `KP_PW` flow through env vars /
   GitHub secrets; `SDV_GH_TOKEN` (or `GITHUB_PAT`) handles commit auth.
 
@@ -101,7 +102,7 @@ Use: `type(scope): description`. Common types: `feat`, `fix`, `chore`,
 feat(scrape): add KenPom efficiency margin column to team page parser
 fix(parse): handle missing depth-chart row for 2024 short rosters
 chore(data): refresh coaches/coaches_2025.csv
-ci: pin r-lib/actions/setup-r-dependencies@v2 in update_kenpom.yml
+docs(readme): clarify manual-only update flow
 ```
 
 Use `type!:` or a `BREAKING CHANGE:` footer for breaking changes.

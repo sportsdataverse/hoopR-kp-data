@@ -1,3 +1,10 @@
+# WARNING: FROZEN ONE-OFF — DO NOT RUN AS-IS --------------------------------
+# Manual, hand-edited snapshot last used for the 2021 season:
+#   * `yr <- 2021` and `version <- "0.2.3"` are hardcoded — edit before use.
+#   * Requires a paid KenPom login via the `kp_user` / `kp_pw` env vars.
+#   * Ends with an inline git2r add/commit/pull/push of data/* to main.
+# No automation exists in this repo; nothing runs this script.
+# ----------------------------------------------------------------------------
 library(kenpomR)
 library(tidyverse)
 library(rvest)

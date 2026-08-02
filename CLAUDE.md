@@ -68,7 +68,7 @@ appends rows into per-year data frames before persisting them.
 |-----------|----------------------------------|--------------------------------------|
 | `KP_USER` | `R/update.R`, `hoopR::login()`   | KenPom account email                 |
 | `KP_PW`   | `R/update.R`, `hoopR::login()`   | KenPom account password              |
-| `GITHUB_PAT` / `SDV_GH_TOKEN` | `.github/workflows/update_kenpom.yml`, `R/0001_push_existing_release_data.R` | GitHub token for commits / piggyback uploads |
+| `GITHUB_PAT` / `SDV_GH_TOKEN` | `R/update.R` (git2r push), `R/0001_push_existing_release_data.R` | GitHub token for commits / piggyback uploads |
 
 ## Repo Layout
 
@@ -92,8 +92,6 @@ data/
   depth_charts/{csv,}year_depth1_{year}.{parquet,rds}
   depth_charts/{csv,}year_depth2_{year}.{parquet,rds}
   geocoded_venues.csv                # Venue geocoding lookup
-.github/workflows/
-  update_kenpom.yml                  # Manual-dispatch KenPom team-links refresh
 ```
 
 The per-year `csv/`, `parquet/`, and `rds/` artifacts under each dataset
@@ -121,12 +119,13 @@ are the all-years aggregates rebuilt periodically.
 
 ## Daily / Update Workflow
 
-`.github/workflows/update_kenpom.yml` is a manual-dispatch workflow
-(`workflow_dispatch` only — no cron yet) that sets up R, installs
-`sportsdataverse/hoopR`, `sportsdataverse/sportsdataverse-data`, and
-`ropensci/piggyback`, and runs the scrape under `KP_USER` / `KP_PW`
-secrets plus `SDV_GH_TOKEN` for commit auth. When/if cron cadence is
-added, mirror the in-season windows used by `hoopR-mbb-data/daily_mbb.yml`.
+**There is no automation.** The former
+`.github/workflows/update_kenpom.yml` was removed as a zombie — it checked
+out the repo and installed R dependencies but had no run step, so it could
+never scrape anything. Updates are manual: hand-edit `yr` / `version` in
+`R/update.R` and run it locally with valid KenPom credentials. If automation
+is ever revived, mirror the in-season windows used by
+`hoopR-mbb-data/daily_mbb.yml`.
 
 The shell convenience `daily_basketball_scraper.sh` is `.gitignore`d —
 local development only.
@@ -174,7 +173,7 @@ Use [Conventional Commits](https://www.conventionalcommits.org/):
 feat(scrape): capture KenPom efficiency margin column on team page
 fix(parse): handle teams with missing depth chart row in 2024
 chore(data): refresh coaches/coaches_2025.csv
-ci: wire KP_USER/KP_PW secrets into update_kenpom.yml
+docs(readme): clarify manual-only update flow
 ```
 
 Daily/season data refresh commits should use a stable, parseable subject —

@@ -102,6 +102,28 @@ All entry points require `KP_USER` / `KP_PW` (or lowercase `kp_user` /
 - [hoopR-nba-data (source: ESPN)](https://github.com/sportsdataverse/hoopR-nba-data)
 - [hoopR-nba-stats-data (source: NBA Stats)](https://github.com/sportsdataverse/hoopR-nba-stats-data)
 
+## Repository layout
+
+<!-- BEGIN GENERATED: layout -->
+
+```
+hoopR-kp-data/
+├── R/   # R pipeline stages and publish toolchain
+│   ├── 0000_create_hoopR_releases_init.R
+│   ├── 0001_push_existing_release_data.R
+│   ├── pull_team_links.R
+│   ├── pull_team_page.R
+│   ├── team_page_calls.R
+│   └── update.R
+└── data/   # committed datasets
+    ├── coaches/
+    ├── depth_charts/
+    ├── players/
+    └── team_schedules/
+```
+
+<!-- END GENERATED: layout -->
+
 ## Reports & explainers
 
 <!-- BEGIN GENERATED: reports -->

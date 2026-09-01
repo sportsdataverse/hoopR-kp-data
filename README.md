@@ -16,6 +16,46 @@
 >   create/backfill ESPN MBB/NBA release tags on `sportsdataverse-data`,
 >   unrelated to KenPom). Do not re-run them.
 
+## hoopR KenPom workflow diagram
+
+```mermaid
+  graph LR;
+    S[kenpom.com paid login]-. manual, frozen at 2021 .->A[hoopR-kp-data];
+    A[hoopR-kp-data]-->D[data/*.csv committed in-repo];
+```
+
+```mermaid
+flowchart TB;
+    subgraph A[hoopR-kp-data — DORMANT, manual only];
+        direction TB;
+        A0[R/update.R]-->A1[R/pull_team_links.R];
+        A1[R/pull_team_links.R]-->A2[R/pull_team_page.R];
+        A2[R/pull_team_page.R]-->A3[R/team_page_calls.R];
+    end;
+```
+
+No automation runs here; `R/update.R` is a manual one-off frozen at `yr <- 2021`.
+`R/0000_*`/`R/0001_*` are one-time release bootstraps for the ESPN tags — do not
+re-run them.
+
+[hoopR-mbb-raw repository (source: ESPN)](https://github.com/sportsdataverse/hoopR-mbb-raw)
+
+[hoopR-mbb-data repository (source: ESPN)](https://github.com/sportsdataverse/hoopR-mbb-data)
+
+[hoopR-nba-raw repository (source: ESPN)](https://github.com/sportsdataverse/hoopR-nba-raw)
+
+[hoopR-nba-data repository (source: ESPN)](https://github.com/sportsdataverse/hoopR-nba-data)
+
+[hoopR-nba-stats-raw repository (source: NBA Stats)](https://github.com/sportsdataverse/hoopR-nba-stats-raw)
+
+[hoopR-nba-stats-data repository (source: NBA Stats)](https://github.com/sportsdataverse/hoopR-nba-stats-data)
+
+[ncaa-mbb-hoops-raw repository (source: stats.ncaa.org)](https://github.com/sportsdataverse/ncaa-mbb-hoops-raw)
+
+[ncaa-mbb-hoops-data repository (source: stats.ncaa.org)](https://github.com/sportsdataverse/ncaa-mbb-hoops-data)
+
+[hoopR-kp-data repository (source: KenPom, dormant)](https://github.com/sportsdataverse/hoopR-kp-data)
+
 ## What this repo is
 
 R-side scraper that logs into [kenpom.com](https://kenpom.com) (paid

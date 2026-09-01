@@ -61,3 +61,13 @@ All entry points require `KP_USER` / `KP_PW` (or lowercase `kp_user` /
 - [hoopR-nba-raw (source: ESPN)](https://github.com/sportsdataverse/hoopR-nba-raw)
 - [hoopR-nba-data (source: ESPN)](https://github.com/sportsdataverse/hoopR-nba-data)
 - [hoopR-nba-stats-data (source: NBA Stats)](https://github.com/sportsdataverse/hoopR-nba-stats-data)
+
+## Automation & status
+
+<!-- BEGIN GENERATED: status -->
+
+| workflow | schedule | last run |
+|---|---|---|
+| _none_ | — | — |
+
+<!-- END GENERATED: status -->
